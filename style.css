@@ -23,7 +23,7 @@ header{
     height: auto;
 }
 
-main {
+#startMenu {
     display: flex;
     justify-content: center;
     flex-direction: column;
