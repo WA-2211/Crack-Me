@@ -29,15 +29,12 @@ const words = [
 
 
 
-/*------------------------ Cached Element References ------------------------*/
-
-
-
 /*-------------------------------- Functions --------------------------------*/
 
 function startGame() {
     startMenuElement.style.display = 'none'
     gameElement.style.display = 'block'
+    displayWord()
 
 }
 
@@ -45,6 +42,12 @@ function quitGame (){
     startMenuElement.style.display = 'flex'
     gameElement.style.display = 'none'
 }
+
+function displayWord() {
+    const randomWord = words[Math.floor(Math.random()* words.length)]
+    return randomWord
+}
+console.log(displayWord());
 
 /*----------------------------- Event Listeners -----------------------------*/
 btnStart.addEventListener('click', startGame)
