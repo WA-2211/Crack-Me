@@ -1,7 +1,7 @@
 # Project Name
 **Crack Me**
 ## Technologies Used
--Git
+- Git
 - HTML
 - CSS
 - JavaScript

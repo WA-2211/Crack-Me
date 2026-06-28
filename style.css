@@ -1,3 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap');
+
 body {
-    background-color: #0C1B3C;
+    background-color: #0c1b3c;
+    font-family: "Pixelify Sans", "Supermercado One", sans-serif;
+    color: #bc304d;
+    text-align: center;
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    gap: 300px;
+}
+
+header{
+    font-size: 30px;
+}
+
+#logo{
+    width: 120px;
+    height: auto;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    min-height: 50vh;
+}
+#selectMode{
+    font-size: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.btnMode{
+    background-color: rgb(54, 104, 177);
+    color: rgb(189, 221, 244);
+    border: none;
+    border-radius: 10px;
+    width: 340px;
+    height: 40px;
+}
+
+.btnMode:hover {
+    background-color: rgb(39, 142, 221);
+    cursor: pointer;
+}
+
+#btnStart {
+    background-color: rgb(188, 48, 77);
+    color: rgb(189, 221, 244);
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    height: 30px;
+}
+
+#btnStart:hover {
+    background-color: rgb(235, 60, 77);
+    cursor: pointer;
 }
