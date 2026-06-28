@@ -45,6 +45,8 @@ header{
     border-radius: 10px;
     width: 340px;
     height: 40px;
+    font-family: "Supermercado One", sans-serif;
+
 }
 
 .btnMode:hover {
@@ -59,6 +61,7 @@ header{
     border-radius: 10px;
     width: 150px;
     height: 30px;
+    font-family: "Supermercado One", sans-serif;
 }
 
 #btnStart:hover {
@@ -73,9 +76,44 @@ header{
     border-radius: 10px;
     height: 20px;
     width: 70px;
+    font-family: "Supermercado One", sans-serif;
+
 }
 
 #btnQuit:hover {
     background-color: rgb(235, 60, 77);
+    cursor: pointer;
+}
+
+#keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyeElement {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.key {
+  width: 100%;
+  background-color: rgb(244, 151, 22);
+  border: 3px solid rgb(254, 191, 0);
+  border-radius: 5px;
+  font-size: 60px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+ margin: 3px;
+}
+
+.key:hover {
+    background-color: #FCC206;
     cursor: pointer;
 }

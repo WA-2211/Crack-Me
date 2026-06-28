@@ -5,6 +5,7 @@ const btnVsComputer = document.querySelector('#btnVsComputer')
 const startMenuElement = document.querySelector('#startMenu')
 const gameElement = document.querySelector('#game')
 const btnQuit = document.querySelector('#btnQuit')
+const keyboardElement = document.querySelectorAll('.key')
 
 /*-------------------------------- Constants --------------------------------*/
 const words = [
