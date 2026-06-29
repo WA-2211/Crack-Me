@@ -44,6 +44,9 @@ function checkGameOver(){
 }
 
 function restartGame(){
+    lives = 3
+    gameOver = false
+    displayMessage.textContent = ''
    
 }
 function handleClick(event) {
@@ -76,8 +79,8 @@ function startGame() {
     startMenuElement.style.display = 'none'
     gameElement.style.display = 'block'
 
+    restartGame()
     wordContainerElement.innerHTML = ''
-    
     displayWord()
 }
 
