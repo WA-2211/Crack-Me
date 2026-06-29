@@ -1,5 +1,4 @@
 /*------------------------ Cached Element References ------------------------*/
-const btnStart = document.querySelector('#btnStart')
 const btnSolo = document.querySelector('#btnSolo')
 const btnVsComputer = document.querySelector('#btnVsComputer')
 const startMenuElement = document.querySelector('#startMenu')
@@ -35,6 +34,9 @@ let randomWord
 function startGame() {
     startMenuElement.style.display = 'none'
     gameElement.style.display = 'block'
+
+    randomWord = null
+
     displayWord()
     letterCell()
 }
@@ -42,6 +44,7 @@ function startGame() {
 function quitGame (){
     startMenuElement.style.display = 'flex'
     gameElement.style.display = 'none'
+    
 }
 
 function displayWord() {
@@ -59,10 +62,10 @@ function letterCell(){
         const cell = document.createElement('div')
         cell.classList.add('cell')
         wordContainerElement.appendChild(cell)
-        console.log(i)
     }
 }
 /*----------------------------- Event Listeners -----------------------------*/
-btnStart.addEventListener('click', startGame)
+btnSolo.addEventListener('click', startGame)
+btnVsComputer.addEventListener('click', startGame)
 btnQuit.addEventListener('click', quitGame)
 
