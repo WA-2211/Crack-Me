@@ -49,6 +49,24 @@ function restartGame(){
     displayMessage.textContent = ''
    
 }
+
+function checkForWinner() {
+    let cellFull = true
+
+    for (let oneCell of wordContainerElement.children) {
+        if (oneCell.textContent === '') {
+            cellFull = false
+        }
+
+    }
+    if (cellFull) {
+        displayMessage.textContent = `Word Cracked! ${currentWord} , ${currentDefinition}`
+    }
+
+
+}
+
+
 function handleClick(event) {
     if (gameOver) return
     const splitWord = currentWord.split('')
@@ -72,6 +90,7 @@ function handleClick(event) {
     if(correct === false) {lives--; console.log(lives)}
 
     checkGameOver()
+    checkForWinner()
     
 }
 
