@@ -5,12 +5,11 @@
 - HTML
 - CSS
 - JavaScript
--DOM Maniplualtion
+- DOM Maniplualtion
 ## Description
 Crack Me is a cyber security and cryptography themed game. The player cracks hidden security terms, either playing solo or against computer . There are two round types: Scramble and Cipher(Caesar-cipher).
 
 ## User Stories
-User Stories:
 - As a user, I want to be able to chose between single player (solo game) or 1 vs computer player.
 - As a user, I want to be able to have a start buttuon, so that I can start the game.
 - As a user, I want to be able to have a quit button, so that I can quit the game anytime I want.

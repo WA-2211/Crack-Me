@@ -46,7 +46,6 @@ header{
     width: 340px;
     height: 40px;
     font-family: "Supermercado One", sans-serif;
-
 }
 
 .btnMode:hover {
@@ -74,9 +73,12 @@ header{
     color: rgb(189, 221, 244);
     border: none;
     border-radius: 10px;
-    height: 20px;
+    height: 25px;
     width: 70px;
     font-family: "Supermercado One", sans-serif;
+    position: absolute;
+    top:55px;
+    right: 15px;
 
 }
 
@@ -93,27 +95,49 @@ header{
   justify-content: center;
 }
 
-.keyeElement {
+.keyElement {
     display: flex;
     justify-content: center;
     gap: 5px;
 }
 
 .key {
-  width: 100%;
+  width: 35px;
   background-color: rgb(244, 151, 22);
   border: 3px solid rgb(254, 191, 0);
   border-radius: 5px;
-  font-size: 60px;
+  font-size: 50px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px;
- margin: 3px;
+  margin: 3px;
 }
 
 .key:hover {
-    background-color: #FCC206;
+    background-color: rgb(252, 194, 6);
     cursor: pointer;
 }
+
+#wordContainer {
+    width: auto;
+    height: 55px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.cell {
+    border: 2px rgb(39, 142, 221) solid;
+    border-radius: 5px;
+    box-shadow: 0 3px #bdddf462;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: 40px;
+    width: 35px;
+}
+

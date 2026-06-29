@@ -6,6 +6,7 @@ const startMenuElement = document.querySelector('#startMenu')
 const gameElement = document.querySelector('#game')
 const btnQuit = document.querySelector('#btnQuit')
 const keyboardElement = document.querySelectorAll('.key')
+const wordContainerElement = document.querySelector('#wordContainer')
 
 /*-------------------------------- Constants --------------------------------*/
 const words = [
@@ -26,7 +27,7 @@ const words = [
     {word: 'Salting', definition: 'Adding a unique-random string to a password before hashing'}
 ]
 /*---------------------------- Variables (state) ----------------------------*/
-
+let randomWord
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -35,7 +36,7 @@ function startGame() {
     startMenuElement.style.display = 'none'
     gameElement.style.display = 'block'
     displayWord()
-
+    letterCell()
 }
 
 function quitGame (){
@@ -44,11 +45,23 @@ function quitGame (){
 }
 
 function displayWord() {
-    const randomWord = words[Math.floor(Math.random()* words.length)]
-    return randomWord
+    randomWord = words[Math.floor(Math.random()* words.length)]
+    console.log(randomWord.word.length)
+    console.log(randomWord)
 }
-console.log(displayWord());
 
+function letterCell(){
+
+    let len = randomWord.word.length
+    console.log(len)
+
+    for(let i = 0 ; i < len; i++){
+        const cell = document.createElement('div')
+        cell.classList.add('cell')
+        wordContainerElement.appendChild(cell)
+        console.log(i)
+    }
+}
 /*----------------------------- Event Listeners -----------------------------*/
 btnStart.addEventListener('click', startGame)
 btnQuit.addEventListener('click', quitGame)
