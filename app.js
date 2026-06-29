@@ -7,6 +7,7 @@ const btnQuit = document.querySelector('#btnQuit')
 const keyboardElement = document.querySelectorAll('.key')
 const wordContainerElement = document.querySelector('#wordContainer')
 
+
 /*-------------------------------- Constants --------------------------------*/
 const words = [
     {word: 'Botnet', definition: 'A network of compromised devices controlled by an attacker'},
@@ -27,9 +28,44 @@ const words = [
 ]
 /*---------------------------- Variables (state) ----------------------------*/
 let randomWord
-
-
+let letter
+let currentWord
+let lives = 3
+// const cell = document.createElement('div')
 /*-------------------------------- Functions --------------------------------*/
+
+// write tomorrow
+function checkGameOver(){
+
+}
+
+function restartGame(){
+    
+}
+function handleClick(event) {
+    const splitWord = currentWord.split('')
+    letter = event.target.id
+    console.log(`current word ${currentWord.split('')}`)
+
+
+    console.log(letter)
+    let correct = false
+
+    splitWord.forEach((letterInWord, index)=>{
+        if(letter.toLowerCase() === letterInWord.toLowerCase()){
+            correct = true
+            console.log('You picked right letter')
+            console.log(wordContainerElement.children)
+            wordContainerElement.children[index].textContent = letterInWord
+        }
+        console.log(letterInWord)
+    })
+
+    if(correct === false) {lives--; console.log(lives)}
+
+    checkGameOver()
+    
+}
 
 function startGame() {
     startMenuElement.style.display = 'none'
@@ -39,35 +75,39 @@ function startGame() {
     wordContainerElement.innerHTML = ''
 
     displayWord()
-    letterCell()
+    // letterCell()
 }
 
 function quitGame (){
     startMenuElement.style.display = 'flex'
-    gameElement.style.display = 'none'
-
-    
+    gameElement.style.display = 'none'    
 }
 
 function displayWord() {
-    randomWord = words[Math.floor(Math.random()* words.length)]
-    console.log(randomWord.word.length)
-    console.log(randomWord)
+    const { word } = words[Math.floor(Math.random()* words.length)]
+    currentWord = word
+    wordContainerElement.innerHTML = word.split('').map(() => `<div class="cell"></div>`).join('')
+    console.log(wordContainerElement)
 }
 
-function letterCell(){
+// function letterCell() {
 
-    let len = randomWord.word.length
-    console.log(len)
+//     let len = randomWord.word.length
 
-    for(let i = 0 ; i < len; i++){
-        const cell = document.createElement('div')
-        cell.classList.add('cell')
-        wordContainerElement.appendChild(cell)
-    }
-}
+//     for (let i = 0; i < len; i++) {
+//         cell = document.createElement('div')
+//         cell.classList.add('cell')
+//         wordContainerElement.appendChild(cell)
+//     }
+// }
+
+  
 /*----------------------------- Event Listeners -----------------------------*/
 btnSolo.addEventListener('click', startGame)
 btnVsComputer.addEventListener('click', startGame)
 btnQuit.addEventListener('click', quitGame)
+
+for(let oneKeyboardElement of keyboardElement){
+     oneKeyboardElement.addEventListener('click', handleClick)
+}
 
