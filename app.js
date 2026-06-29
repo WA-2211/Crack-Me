@@ -6,7 +6,7 @@ const gameElement = document.querySelector('#game')
 const btnQuit = document.querySelector('#btnQuit')
 const keyboardElement = document.querySelectorAll('.key')
 const wordContainerElement = document.querySelector('#wordContainer')
-
+const displayMessage = document.querySelector('#message')
 
 /*-------------------------------- Constants --------------------------------*/
 const words = [
@@ -27,22 +27,27 @@ const words = [
     {word: 'Salting', definition: 'Adding a unique-random string to a password before hashing'}
 ]
 /*---------------------------- Variables (state) ----------------------------*/
-let randomWord
 let letter
 let currentWord
+let currentDefinition
 let lives = 3
-// const cell = document.createElement('div')
+let gameOver = false
 /*-------------------------------- Functions --------------------------------*/
 
 // write tomorrow
 function checkGameOver(){
+    if(lives <= 0){
+        displayMessage.textContent = `Game Over! ${currentWord} , ${currentDefinition}`
+        gameOver = true
+    }
 
 }
 
 function restartGame(){
-    
+   
 }
 function handleClick(event) {
+    if (gameOver) return
     const splitWord = currentWord.split('')
     letter = event.target.id
     console.log(`current word ${currentWord.split('')}`)
@@ -71,11 +76,9 @@ function startGame() {
     startMenuElement.style.display = 'none'
     gameElement.style.display = 'block'
 
-    randomWord = null
     wordContainerElement.innerHTML = ''
-
+    
     displayWord()
-    // letterCell()
 }
 
 function quitGame (){
@@ -84,22 +87,13 @@ function quitGame (){
 }
 
 function displayWord() {
-    const { word } = words[Math.floor(Math.random()* words.length)]
+    const { word, definition } = words[Math.floor(Math.random()* words.length)]
     currentWord = word
+    currentDefinition = definition
     wordContainerElement.innerHTML = word.split('').map(() => `<div class="cell"></div>`).join('')
     console.log(wordContainerElement)
 }
 
-// function letterCell() {
-
-//     let len = randomWord.word.length
-
-//     for (let i = 0; i < len; i++) {
-//         cell = document.createElement('div')
-//         cell.classList.add('cell')
-//         wordContainerElement.appendChild(cell)
-//     }
-// }
 
   
 /*----------------------------- Event Listeners -----------------------------*/
