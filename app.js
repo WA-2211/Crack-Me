@@ -36,6 +36,7 @@ function startGame() {
     gameElement.style.display = 'block'
 
     randomWord = null
+    wordContainerElement.innerHTML = ''
 
     displayWord()
     letterCell()
@@ -44,6 +45,7 @@ function startGame() {
 function quitGame (){
     startMenuElement.style.display = 'flex'
     gameElement.style.display = 'none'
+
     
 }
 

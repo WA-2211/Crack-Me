@@ -32,15 +32,13 @@ header{
     min-height: 50vh;
 }
 #selectMode{
-    font-size: 20px;
+    font-size: 25px;
     padding: 10px;
     display: flex;
     justify-content: center;
 }
 
 .btnMode{
-    background-color: rgb(54, 104, 177);
-    color: rgb(189, 221, 244);
     border: none;
     border-radius: 10px;
     width: 340px;
@@ -48,23 +46,24 @@ header{
     font-family: "Supermercado One", sans-serif;
 }
 
-.btnMode:hover {
+#btnSolo {
+    background-color: rgb(54, 104, 177);
+    color: rgb(189, 221, 244);
+}
+
+#btnSolo:hover {
     background-color: rgb(39, 142, 221);
     cursor: pointer;
 }
 
-#btnStart {
-    background-color: rgb(188, 48, 77);
+#btnVsComputer{
+    background-color: rgb(26, 85, 175);
     color: rgb(189, 221, 244);
-    border: none;
-    border-radius: 10px;
-    width: 150px;
-    height: 30px;
-    font-family: "Supermercado One", sans-serif;
+
 }
 
-#btnStart:hover {
-    background-color: rgb(235, 60, 77);
+#btnVsComputer:hover{
+    background-color: rgb(34, 107, 217);
     cursor: pointer;
 }
 
