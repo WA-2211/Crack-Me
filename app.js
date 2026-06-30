@@ -7,6 +7,7 @@ const btnQuit = document.querySelector('#btnQuit')
 const keyboardElement = document.querySelectorAll('.key')
 const wordContainerElement = document.querySelector('#wordContainer')
 const displayMessage = document.querySelector('#message')
+const scrambleWordElement = document.querySelector('#scramble')
 
 /*-------------------------------- Constants --------------------------------*/
 const words = [
@@ -26,15 +27,18 @@ const words = [
     {word: 'Hashing', definition: 'A function used to convert data into fixed string of characters'},
     {word: 'Salting', definition: 'Adding a unique-random string to a password before hashing'}
 ]
+
 /*---------------------------- Variables (state) ----------------------------*/
 let letter
 let currentWord
+let scrambledWord
 let currentDefinition
 let lives = 3
 let gameOver = false
+
 /*-------------------------------- Functions --------------------------------*/
 
-// write tomorrow
+// Game over, round lost: lost all 3 lives 
 function checkGameOver(){
     if(lives <= 0){
         displayMessage.textContent = `Game Over! ${currentWord} , ${currentDefinition}`
@@ -43,6 +47,7 @@ function checkGameOver(){
 
 }
 
+//reset 
 function restartGame(){
     lives = 3
     gameOver = false
@@ -61,10 +66,13 @@ function checkForWinner() {
     }
     if (cellFull) {
         displayMessage.textContent = `Word Cracked! ${currentWord} , ${currentDefinition}`
+        gameOver = true
     }
 
 
 }
+
+
 
 
 function handleClick(event) {
@@ -101,6 +109,8 @@ function startGame() {
     restartGame()
     wordContainerElement.innerHTML = ''
     displayWord()
+
+   // scrambleRound()
 }
 
 function quitGame (){
@@ -114,10 +124,31 @@ function displayWord() {
     currentDefinition = definition
     wordContainerElement.innerHTML = word.split('').map(() => `<div class="cell"></div>`).join('')
     console.log(wordContainerElement)
+
+    scrambledWord = currentWord
+  scrambledWord = word.split('').sort(() => Math.random() - 0.5).join('')
+
+ scrambleWordElement.textContent = scrambledWord
+  console.log(scrambleWordElement)
+
+}
+
+//   //two round types
+// function scrambleRound() {
+//    selectedWord.word = words[Math.floor(Math.random()* words.length)]
+//     scrambledWord = currentWord
+//     scrambledWord = word.split('').sort(() => Math.random() - 0.5).join('')
+
+//     scrambleWordElement.textContent = scrambledWord
+//     console.log(scrambleWordElement)
+
+// }
+
+function cipherRound(){
+
 }
 
 
-  
 /*----------------------------- Event Listeners -----------------------------*/
 btnSolo.addEventListener('click', startGame)
 btnVsComputer.addEventListener('click', startGame)
