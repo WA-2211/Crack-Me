@@ -144,12 +144,9 @@ function handleClick(event) {
 function startGame() {
     startMenuElement.style.display = 'none'
     gameElement.style.display = 'block'
-
-    restartGame()
     wordContainerElement.innerHTML = ''
+    restartGame()
     displayWord()
-    // displayMessage.textContent = ''
-    // displayMessage.style.backgroundColor = ''
     displayTimer()
 
 
@@ -177,16 +174,13 @@ function displayWord() {
     scrambleWordElement.textContent = scrambledWord.toLowerCase()
     console.log(scrambleWordElement)
 
-    // hint = currentDefinition
-    // btnHint.textContent = hint
-
+    
 }
 
 
-function displayHint(event) {
-    btnHint.target.id
-    hint = currentDefinition.textContent
-
+function displayHint() {
+    displayMessage.textContent = currentDefinition
+    displayMessage.style.display = 'inline-block'
 
 }
 
