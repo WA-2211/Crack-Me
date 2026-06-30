@@ -54,7 +54,7 @@ let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 /*-------------------------------- Functions --------------------------------*/
 
-// Game over, round lost: lost all 3 lives 
+// Game over, round lost: lost all 3 lives or timer runs out 
 function checkGameOver() {
 
     if (lives <= 0) {
@@ -74,6 +74,7 @@ function checkGameOver() {
     }
 }
 
+//timer function
 function displayTimer() {
 
     timerInterval = setInterval(() => {
@@ -123,6 +124,11 @@ function checkForWinner() {
 
 function handleClick(event) {
     if (gameOver) return
+    if(mode === 'vsComputer' && turn != 'player'){
+        return
+    }
+
+
     const splitWord = currentWord.split('')
     letter = event.target.id
     console.log(`current word ${currentWord.split('')}`)
@@ -141,13 +147,18 @@ function handleClick(event) {
         console.log(letterInWord)
     })
 
-    if (correct === false) {
-        lives--
 
-        if(mode === 'vsComputer'){
-            getComputerChoice()
+    if (correct === false) {
+        if (mode === "solo") {
+            lives--
         }
     }
+
+    else if (mode === 'vsComputer') {
+        turn = 'computerPlayer'
+        getComputerChoice()
+    }
+
 
     checkGameOver()
     checkForWinner()
@@ -209,11 +220,13 @@ function singlePlayerGame(){
 
 function vsComputerGame(){
     mode = 'vsComputer'
+    turn = 'player'
     startGame()
 }
 
 function getComputerChoice(){
     if (gameOver) return
+
     
     if (Math.random() < 0.8) { //computer player level: chance of being correct pick letters from the current word instead of random letters
     computerChoice = currentWord[Math.floor(Math.random() * currentWord.length)]
