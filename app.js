@@ -8,7 +8,9 @@ const keyboardElement = document.querySelectorAll('.key')
 const wordContainerElement = document.querySelector('#wordContainer')
 const displayMessage = document.querySelector('#message')
 const scrambleWordElement = document.querySelector('#scramble')
-
+const btnHint = document.querySelector('#btnHint')
+const timerElement = document.querySelector('#timer')
+timerElement.textContent = '25s'
 /*-------------------------------- Constants --------------------------------*/
 const words = [
     {word: 'Botnet', definition: 'A network of compromised devices controlled by an attacker'},
@@ -35,24 +37,48 @@ let scrambledWord
 let currentDefinition
 let lives = 3
 let gameOver = false
+let hint
+let seconds = 25
+let timerInterval
 
 /*-------------------------------- Functions --------------------------------*/
 
 // Game over, round lost: lost all 3 lives 
 function checkGameOver(){
-    if(lives <= 0){
+
+    if(gameOver){
         displayMessage.textContent = `Game Over! ${currentWord} , ${currentDefinition}`
-        gameOver = true
+        
     }
+}
+
+function displayTimer() {
+
+    timeInterval = setInterval(() => {
+        seconds--
+        timerElement.textContent = seconds + 's' 
+
+        if (seconds === 0) {
+                clearInterval(timeInterval)
+                displayMessage.textContent = `Game Over! ${currentWord} , ${currentDefinition}`
+                checkGameOver()
+            }
+
+
+    }, 1000)
 
 }
+
+
+
 
 //reset 
 function restartGame(){
     lives = 3
     gameOver = false
     displayMessage.textContent = ''
-   
+    seconds = 25
+
 }
 
 function checkForWinner() {
@@ -95,7 +121,14 @@ function handleClick(event) {
         console.log(letterInWord)
     })
 
-    if(correct === false) {lives--; console.log(lives)}
+    if(correct === false) {
+        lives--; 
+        console.log(lives)
+        if(lives <= 0){ 
+            gameOver = true
+        }
+        
+    }
 
     checkGameOver()
     checkForWinner()
@@ -109,13 +142,16 @@ function startGame() {
     restartGame()
     wordContainerElement.innerHTML = ''
     displayWord()
+    displayTimer()
+    
 
-   // scrambleRound()
 }
 
 function quitGame (){
     startMenuElement.style.display = 'flex'
     gameElement.style.display = 'none'    
+    clearInterval(timeInterval)
+
 }
 
 function displayWord() {
@@ -133,18 +169,29 @@ function displayWord() {
     scrambleWordElement.textContent = scrambledWord.toLowerCase()
     console.log(scrambleWordElement)
 
+
+    
 }
+
 
 
 function cipherRound(){
 
 }
 
+function displayHint(){
+
+    
+}
+
+
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 btnSolo.addEventListener('click', startGame)
 btnVsComputer.addEventListener('click', startGame)
 btnQuit.addEventListener('click', quitGame)
+//btnHint.addEventListener('click', displayHint)
 
 for(let oneKeyboardElement of keyboardElement){
      oneKeyboardElement.addEventListener('click', handleClick)
