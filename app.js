@@ -50,6 +50,7 @@ function checkGameOver() {
         gameOver = true
         clearInterval(timerInterval)
         displayMessage.textContent = `Game Over! ${currentWord} , ${currentDefinition}`
+        displayMessage.style.display = 'inline-block'
 
     }
 
@@ -57,7 +58,7 @@ function checkGameOver() {
         gameOver = true
         clearInterval(timerInterval)
         displayMessage.textContent = `Game Over! ${currentWord} , ${currentDefinition}`
-
+        displayMessage.style.display = 'inline-block'
 
     }
 }
@@ -81,7 +82,11 @@ function restartGame() {
     lives = 3
     gameOver = false
     displayMessage.textContent = ''
+    displayMessage.style.display = 'none'
     seconds = 25
+    clearInterval(timerInterval)
+
+
 
 }
 
@@ -97,6 +102,7 @@ function checkForWinner() {
     if (cellFull) {
         clearInterval(timerInterval)
         displayMessage.textContent = `Word Cracked! ${currentWord} , ${currentDefinition}`
+        displayMessage.style.display = 'inline-block'
         gameOver = true
     }
 
