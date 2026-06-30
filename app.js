@@ -125,24 +125,16 @@ function displayWord() {
     wordContainerElement.innerHTML = word.split('').map(() => `<div class="cell"></div>`).join('')
     console.log(wordContainerElement)
 
-    scrambledWord = currentWord
-  scrambledWord = word.split('').sort(() => Math.random() - 0.5).join('')
 
- scrambleWordElement.textContent = scrambledWord
-  console.log(scrambleWordElement)
+    //scramble round:
+    scrambledWord = currentWord
+    scrambledWord = word.split('').sort(() => Math.random() - 0.5).join('')
+
+    scrambleWordElement.textContent = scrambledWord.toLowerCase()
+    console.log(scrambleWordElement)
 
 }
 
-//   //two round types
-// function scrambleRound() {
-//    selectedWord.word = words[Math.floor(Math.random()* words.length)]
-//     scrambledWord = currentWord
-//     scrambledWord = word.split('').sort(() => Math.random() - 0.5).join('')
-
-//     scrambleWordElement.textContent = scrambledWord
-//     console.log(scrambleWordElement)
-
-// }
 
 function cipherRound(){
 
