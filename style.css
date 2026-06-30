@@ -121,8 +121,6 @@ header{
 }
 
 
-
-
 #keyboard {
   display: flex;
   flex-wrap: wrap;
@@ -142,7 +140,7 @@ header{
   background-color: rgb(244, 151, 22);
   border: 3px solid rgb(254, 191, 0);
   border-radius: 5px;
-  font-size: 45px;
+  font-size: 25px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -181,4 +179,12 @@ header{
 #scramble {
     color: rgb(193, 211, 223);
     font-size: 45px;
+}
+
+#message {
+    background-color: rgb(38, 142, 222);
+    color: rgb(193, 211, 223);
+    border-radius: 5px;
+    display: inline-block;
+    padding: 8px;
 }
