@@ -33,13 +33,24 @@ const words = [
 /*---------------------------- Variables (state) ----------------------------*/
 let letter
 let currentWord
-let scrambledWord
 let currentDefinition
+
+let scrambledWord
+let cipherWord
+let shift
+
+
 let lives = 3
 let gameOver = false
+
 let hint
 let seconds = 25
 let timerInterval
+
+let mode
+let turn = ''
+let computerChoice
+let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -131,9 +142,11 @@ function handleClick(event) {
     })
 
     if (correct === false) {
-        lives--;
-        console.log(lives)
+        lives--
 
+        if(mode === 'vsComputer'){
+            getComputerChoice()
+        }
     }
 
     checkGameOver()
@@ -174,7 +187,8 @@ function displayWord() {
     scrambleWordElement.textContent = scrambledWord.toLowerCase()
     console.log(scrambleWordElement)
 
-    
+
+   
 }
 
 
@@ -186,12 +200,53 @@ function displayHint() {
 
 
 
-// function cipherRound(){
 
-// }
+//picks random letter and check if its included in the current word
+function singlePlayerGame(){
+    mode = 'solo'
+    startGame()
+}
+
+function vsComputerGame(){
+    mode = 'vsComputer'
+    startGame()
+}
+
+function getComputerChoice(){
+    if (gameOver) return
+    
+    if (Math.random() < 0.8) { //computer player level: chance of being correct pick letters from the current word instead of random letters
+    computerChoice = currentWord[Math.floor(Math.random() * currentWord.length)]
+    }
+    else{
+    computerChoice = letters[Math.floor(Math.random() * 26)]
+    }
+
+    console.log('computer choice:', computerChoice)
+    const splitWord = currentWord.split('')
+    let correct = false
+
+     splitWord.forEach((letterInWord, index) => {
+        if (computerChoice.toLowerCase() === letterInWord.toLowerCase()) {
+            correct = true
+            console.log('Computer picked right letter!')
+            console.log(wordContainerElement.children[index])
+            wordContainerElement.children[index].textContent = letterInWord
+        }
+        console.log(letterInWord)
+    })
+
+     checkForWinner()
+
+}
+
+
+
+
+
 /*----------------------------- Event Listeners -----------------------------*/
-btnSolo.addEventListener('click', startGame)
-btnVsComputer.addEventListener('click', startGame)
+btnSolo.addEventListener('click', singlePlayerGame)
+btnVsComputer.addEventListener('click', vsComputerGame)
 btnQuit.addEventListener('click', quitGame)
 btnHint.addEventListener('click', displayHint)
 
