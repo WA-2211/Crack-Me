@@ -13,6 +13,7 @@ const timerElement = document.querySelector('#timer')
 timerElement.textContent = '25s'
 const displayTurnMessage = document.querySelector('#turnMessage')
 const displayScore = document.querySelector('#score')
+const divDisplayScore = document.querySelector('#displayScore')
 /*-------------------------------- Constants --------------------------------*/
 const words = [
     { word: 'Botnet', definition: 'A network of compromised devices controlled by an attacker' },
@@ -210,6 +211,7 @@ function handleClick(event) {
     }
 
     if (mode === 'vsComputer') {
+    
         console.log('TURN change if')
         //turn = 'computerPlayer'
         if (turn === 'computerPlayer') displayTurnMessage.textContent = `Its Computers turn`
@@ -280,12 +282,17 @@ function displayHint() {
 //picks random letter and check if its included in the current word
 function singlePlayerGame() {
     mode = 'solo'
+     divDisplayScore.style.display = 'inline-block'
+     displayScore.style.display = 'inline-block'
+    
     startGame()
 }
 
 function vsComputerGame() {
     mode = 'vsComputer'
     turn = 'player'
+    divDisplayScore.style.display = 'none'
+    displayScore.style.display = 'none'
     
     startGame()
 }
