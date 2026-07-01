@@ -87,6 +87,7 @@ header{
     cursor: pointer;
 }
 
+
 #btnHint {
     background-color: rgb(188, 48, 77);
     color: rgb(189, 221, 244);
@@ -100,6 +101,12 @@ header{
     left: 15px;
 }
 
+
+#btnHint:hover {
+    background-color: rgb(235, 60, 77);
+    cursor: pointer;
+}
+
 #timer{
     background-color: rgb(188, 48, 77);
     color: rgb(189, 221, 244);
@@ -111,16 +118,22 @@ header{
     position: absolute;
     top:15px;
     left: 15px;
+}
+
+#displayScore {
+    background-color: rgb(252, 194, 6);
+    color: rgb(189, 221, 244);
+    position: absolute;
+    top:55px;
+    right: 152px;
+    border: none;
+    border-radius: 10px;
+    padding: 3px;
+    height: 25px;
+    font-family: "Supermercado One", sans-serif; ;
 
 
 }
-
-#btnHint:hover {
-    background-color: rgb(235, 60, 77);
-    cursor: pointer;
-}
-
-
 #keyboard {
   display: flex;
   flex-wrap: wrap;

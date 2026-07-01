@@ -12,6 +12,7 @@ const btnHint = document.querySelector('#btnHint')
 const timerElement = document.querySelector('#timer')
 timerElement.textContent = '25s'
 const displayTurnMessage = document.querySelector('#turnMessage')
+const displayScore = document.querySelector('#score')
 /*-------------------------------- Constants --------------------------------*/
 const words = [
     { word: 'Botnet', definition: 'A network of compromised devices controlled by an attacker' },
@@ -53,6 +54,8 @@ let mode
 let turn = ''
 let computerChoice
 let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+let score = 0
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -96,6 +99,8 @@ function displayTimer() {
 function restartGame() {
     lives = 3
     gameOver = false
+    score = 0
+    displayScore.textContent = 0
     displayMessage.textContent = ''
     displayMessage.style.display = 'none'
 
@@ -119,21 +124,33 @@ function checkForWinner() {
         }
 
     }
+    if(cellFull && mode === 'solo'){
+        clearInterval(timerInterval)
+        displayMessage.textContent = ` Word Cracked! ${currentWord} , ${currentDefinition}`
+        displayMessage.style.display = 'inline-block'
+        score *= 20
+        displayScore.textContent = score
+        gameOver = true
+        displayTurnMessage.textContent = ''
+        
+    }
+
+
     if (cellFull && turn === 'player') {
         clearInterval(timerInterval)
         displayMessage.textContent = ` Word Cracked! ${currentWord} , ${currentDefinition}`
         displayMessage.style.display = 'inline-block'
         gameOver = true
-       displayTurnMessage.textContent= ''
+        displayTurnMessage.textContent = ''
+        
 
     }
-    else if(cellFull && turn === 'computerPlayer'){
+    else if (cellFull && turn === 'computerPlayer') {
         clearInterval(timerInterval)
         displayMessage.textContent = `computer Cracked! ${currentWord} , ${currentDefinition}`
         displayMessage.style.display = 'inline-block'
         gameOver = true
         displayTurnMessage.textContent = ''
-        
     }
 
 
@@ -159,10 +176,13 @@ function handleClick(event) {
     splitWord.forEach((letterInWord, index) => {
         if (letter.toLowerCase() === letterInWord.toLowerCase()) {
             correct = true
+            score ++
+            displayScore.textContent = score
             console.log('You picked right letter')
             console.log(wordContainerElement.children)
             wordContainerElement.children[index].textContent = letterInWord
         }
+        console.log(score)
         console.log(letterInWord)
     })
 
@@ -197,6 +217,8 @@ function startGame() {
     restartGame()
     displayWord()
     displayTimer()
+
+  
 
 
 }
@@ -270,9 +292,13 @@ function getPlayerChoice(){
          splitWord.forEach((letterInWord, index) => {
         if (letter.toLowerCase() === letterInWord.toLowerCase()) {
             correct = true
+            score ++
+            score.textContent = score
             console.log('You picked right letter')
             console.log(wordContainerElement.children)
             wordContainerElement.children[index].textContent = letterInWord
+            displayScore.textContent = score
+
         }
         console.log(letterInWord)
     })
