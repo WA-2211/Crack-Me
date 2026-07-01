@@ -68,6 +68,8 @@ header{
     cursor: pointer;
 }
 
+
+
 #btnQuit {
     background-color: rgb(188, 48, 77);
     color: rgb(189, 221, 244);
@@ -97,7 +99,7 @@ header{
     width: 80px;
     font-family: "Supermercado One", sans-serif;
     position: absolute;
-    top: 20px;
+    top:55px;
     left: 15px;
 }
 
@@ -116,7 +118,7 @@ header{
     width: 80px;
     font-family: "Supermercado One", sans-serif;
     position: absolute;
-    top:55px;
+    top:20px;
     left: 15px;
 }
 
@@ -203,8 +205,8 @@ header{
     background-color: rgb(38, 142, 222);
     color: rgb(193, 211, 223);
     border-radius: 5px;
-    display: none;
-    padding: 8px;
+    display: inline-block;
+    padding: 5px;
 }
 
 #turnMessage{

@@ -101,8 +101,7 @@ function restartGame() {
     gameOver = false
     score = 0
     displayScore.textContent = 0
-    displayMessage.textContent = ''
-    displayMessage.style.display = 'none'
+    displayMessage.textContent = 'Guess the word'
     correctLetterArray = []
 
     clearInterval(timerInterval)
@@ -240,7 +239,6 @@ function startGame() {
     oneKeyboardElement.addEventListener('click', handleClick)
 }
 
-
 }
 
 function quitGame() {
@@ -264,9 +262,6 @@ function displayWord() {
 
     scrambleWordElement.textContent = scrambledWord.toLowerCase()
     console.log(scrambleWordElement)
-
-
-
 
 }
 
@@ -362,10 +357,6 @@ function getComputerChoice() {
     checkForWinner()
 
 }
-
-
-
-
 
 /*----------------------------- Event Listeners -----------------------------*/
 btnSolo.addEventListener('click', singlePlayerGame)
