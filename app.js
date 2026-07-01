@@ -183,7 +183,6 @@ function handleClick(event) {
     splitWord.forEach((letterInWord, index) => {
         if (letter.toLowerCase() === letterInWord.toLowerCase() ) {
             correct = true
-           // event.currentTarget.disabled = true
 
             if (!isHere) {
                 correctLetterArray.push(letter)
@@ -212,7 +211,7 @@ function handleClick(event) {
     if (mode === 'vsComputer') {
     
         console.log('TURN change if')
-        //turn = 'computerPlayer'
+        turn = 'computerPlayer'
         if (turn === 'computerPlayer') displayTurnMessage.textContent = `Its Computers turn`
         else displayTurnMessage.textContent = `Its Computers turn`
         setTimeout(() => {
@@ -274,7 +273,6 @@ function displayHint() {
 
 
 
-//picks random letter and check if its included in the current word
 function singlePlayerGame() {
     mode = 'solo'
      divDisplayScore.style.display = 'inline-block'
@@ -321,12 +319,11 @@ function getPlayerChoice() {
 }
 
 function getComputerChoice() {
-    if (gameOver) return
 
     displayTurnMessage.textContent = 'Its computer turn'
 
 
-    if (Math.random() < 0.8) { //computer player level: chance of being correct pick letters from the current word instead of random letters
+    if (Math.random() < 0.2) { //computer player level
         computerChoice = currentWord[Math.floor(Math.random() * currentWord.length)]
     }
     else {
@@ -367,4 +364,3 @@ btnHint.addEventListener('click', displayHint)
 for (let oneKeyboardElement of keyboardElement) {
     oneKeyboardElement.addEventListener('click', handleClick)
 }
-
