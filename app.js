@@ -38,9 +38,6 @@ let currentWord
 let currentDefinition
 
 let scrambledWord
-let cipherWord
-let shift
-
 
 let lives = 3
 let gameOver = false
@@ -56,6 +53,8 @@ let computerChoice
 let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 let score = 0
+let correctLetterArray = []
+
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -103,8 +102,9 @@ function restartGame() {
     displayScore.textContent = 0
     displayMessage.textContent = ''
     displayMessage.style.display = 'none'
+    correctLetterArray = []
 
-        clearInterval(timerInterval)
+    clearInterval(timerInterval)
 
 
     if (mode === 'vsComputer') {
@@ -124,7 +124,7 @@ function checkForWinner() {
         }
 
     }
-    if(cellFull && mode === 'solo'){
+    if (cellFull && mode === 'solo') {
         clearInterval(timerInterval)
         displayMessage.textContent = ` Word Cracked! ${currentWord} , ${currentDefinition}`
         displayMessage.style.display = 'inline-block'
@@ -132,7 +132,6 @@ function checkForWinner() {
         displayScore.textContent = score
         gameOver = true
         displayTurnMessage.textContent = ''
-        
     }
 
 
@@ -142,7 +141,7 @@ function checkForWinner() {
         displayMessage.style.display = 'inline-block'
         gameOver = true
         displayTurnMessage.textContent = ''
-        
+
 
     }
     else if (cellFull && turn === 'computerPlayer') {
@@ -160,7 +159,7 @@ function checkForWinner() {
 function handleClick(event) {
     console.log(mode)
     if (gameOver) return
-    if(mode === 'vsComputer' && turn != 'player'){
+    if (mode === 'vsComputer' && turn != 'player') {
         return
     }
 
@@ -173,16 +172,33 @@ function handleClick(event) {
     console.log(letter)
     let correct = false
 
+
+    const isHere = correctLetterArray.find(
+        let => {
+            let === letter
+
+        }
+    )
+
     splitWord.forEach((letterInWord, index) => {
-        if (letter.toLowerCase() === letterInWord.toLowerCase()) {
+        if (letter.toLowerCase() === letterInWord.toLowerCase() ) {
             correct = true
-            score ++
+           // event.currentTarget.disabled = true
+
+            if (!isHere) {
+                correctLetterArray.push(letter)
+                score++
+            }
+            else {
+                return
+            }
+
             displayScore.textContent = score
             console.log('You picked right letter')
             console.log(wordContainerElement.children)
+            event.target.removeEventListener('click',handleClick)
             wordContainerElement.children[index].textContent = letterInWord
         }
-        console.log(score)
         console.log(letterInWord)
     })
 
@@ -193,21 +209,22 @@ function handleClick(event) {
         }
     }
 
-     if (mode === 'vsComputer') {
+    if (mode === 'vsComputer') {
         console.log('TURN change if')
         //turn = 'computerPlayer'
-        if(turn === 'computerPlayer') displayTurnMessage.textContent = `Its Computers turn`
+        if (turn === 'computerPlayer') displayTurnMessage.textContent = `Its Computers turn`
         else displayTurnMessage.textContent = `Its Computers turn`
-        setTimeout(()=>{
-        getComputerChoice()
+        setTimeout(() => {
+            getComputerChoice()
 
-        },1000)
+        }, 1000)
     }
 
 
     checkGameOver()
     checkForWinner()
 
+console.log( 'correct letters arr', correctLetterArray)
 }
 
 function startGame() {
@@ -217,8 +234,9 @@ function startGame() {
     restartGame()
     displayWord()
     displayTimer()
-
-  
+    for (let oneKeyboardElement of keyboardElement) {
+    oneKeyboardElement.addEventListener('click', handleClick)
+}
 
 
 }
@@ -246,11 +264,8 @@ function displayWord() {
     console.log(scrambleWordElement)
 
 
-    // //cipher
-    // shift = Math.floor(Math.random() * 25) + 1
-    // cipherWord = cipherRound(word, shift)
-    // scrambleWordElement.textContent = cipherWord 
-   
+
+
 }
 
 
@@ -260,45 +275,34 @@ function displayHint() {
 
 }
 
-// function cipherRound(word, shift){
-//     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' //what i wannt to shift
-//     for(let oneLetter of word){
-//        let cipherIndex = (letters.indexOf(oneLetter) + shift) %26
-//        let cipherText = letters[cipherIndex]
-//        scrambleWordElement.textContent = cipherText
-//     }
-
-// }
 
 
 //picks random letter and check if its included in the current word
-function singlePlayerGame(){
+function singlePlayerGame() {
     mode = 'solo'
     startGame()
 }
 
-function vsComputerGame(){
+function vsComputerGame() {
     mode = 'vsComputer'
     turn = 'player'
+    
     startGame()
 }
 
-function getPlayerChoice(){
-        displayTurnMessage.textContent = 'Its your turn'
+function getPlayerChoice() {
+    displayTurnMessage.textContent = 'Its your turn'
 
-        const splitWord = currentWord.split('')
+    const splitWord = currentWord.split('')
 
-        
-         splitWord.forEach((letterInWord, index) => {
+
+    splitWord.forEach((letterInWord, index) => {
         if (letter.toLowerCase() === letterInWord.toLowerCase()) {
             correct = true
-            score ++
-            score.textContent = score
+            keyboardElement.disabled = 'ture'
             console.log('You picked right letter')
             console.log(wordContainerElement.children)
             wordContainerElement.children[index].textContent = letterInWord
-            displayScore.textContent = score
-
         }
         console.log(letterInWord)
     })
@@ -309,22 +313,22 @@ function getPlayerChoice(){
         getComputerChoice()
     }
 
-     checkForWinner()
+    checkForWinner()
 
 
 }
 
-function getComputerChoice(){
+function getComputerChoice() {
     if (gameOver) return
 
     displayTurnMessage.textContent = 'Its computer turn'
 
-    
+
     if (Math.random() < 0.8) { //computer player level: chance of being correct pick letters from the current word instead of random letters
-    computerChoice = currentWord[Math.floor(Math.random() * currentWord.length)]
+        computerChoice = currentWord[Math.floor(Math.random() * currentWord.length)]
     }
-    else{
-    computerChoice = letters[Math.floor(Math.random() * 26)]
+    else {
+        computerChoice = letters[Math.floor(Math.random() * 26)]
     }
 
     console.log('computer choice:', computerChoice)
@@ -348,7 +352,7 @@ function getComputerChoice(){
 
     })
 
-     checkForWinner()
+    checkForWinner()
 
 }
 

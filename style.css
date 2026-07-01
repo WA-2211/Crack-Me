@@ -130,9 +130,7 @@ header{
     border-radius: 10px;
     padding: 3px;
     height: 25px;
-    font-family: "Supermercado One", sans-serif; ;
-
-
+    font-family: "Supermercado One", sans-serif; 
 }
 #keyboard {
   display: flex;
@@ -165,6 +163,10 @@ header{
 .key:hover {
     background-color: rgb(252, 194, 6);
     cursor: pointer;
+}
+
+.key:disabled{
+    background-color: rgb(6, 55, 252);
 }
 
 #wordContainer {
