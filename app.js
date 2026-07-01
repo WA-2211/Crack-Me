@@ -11,6 +11,7 @@ const scrambleWordElement = document.querySelector('#scramble')
 const btnHint = document.querySelector('#btnHint')
 const timerElement = document.querySelector('#timer')
 timerElement.textContent = '25s'
+const displayTurnMessage = document.querySelector('#turnMessage')
 /*-------------------------------- Constants --------------------------------*/
 const words = [
     { word: 'Botnet', definition: 'A network of compromised devices controlled by an attacker' },
@@ -47,6 +48,7 @@ let hint
 let seconds = 25
 let timerInterval
 
+let correct
 let mode
 let turn = ''
 let computerChoice
@@ -76,6 +78,7 @@ function checkGameOver() {
 
 //timer function
 function displayTimer() {
+    timerElement.textContent = seconds + 's'
 
     timerInterval = setInterval(() => {
         seconds--
@@ -95,11 +98,16 @@ function restartGame() {
     gameOver = false
     displayMessage.textContent = ''
     displayMessage.style.display = 'none'
-    seconds = 25
-    clearInterval(timerInterval)
+
+        clearInterval(timerInterval)
 
 
-
+    if (mode === 'vsComputer') {
+        seconds = 60
+    }
+    if (mode === 'solo') {
+        seconds = 25
+    }
 }
 
 function checkForWinner() {
@@ -111,11 +119,21 @@ function checkForWinner() {
         }
 
     }
-    if (cellFull) {
+    if (cellFull && turn === 'player') {
         clearInterval(timerInterval)
-        displayMessage.textContent = `Word Cracked! ${currentWord} , ${currentDefinition}`
+        displayMessage.textContent = ` Word Cracked! ${currentWord} , ${currentDefinition}`
         displayMessage.style.display = 'inline-block'
         gameOver = true
+       displayTurnMessage.textContent= ''
+
+    }
+    else if(cellFull && turn === 'computerPlayer'){
+        clearInterval(timerInterval)
+        displayMessage.textContent = `computer Cracked! ${currentWord} , ${currentDefinition}`
+        displayMessage.style.display = 'inline-block'
+        gameOver = true
+        displayTurnMessage.textContent = ''
+        
     }
 
 
@@ -123,6 +141,7 @@ function checkForWinner() {
 
 
 function handleClick(event) {
+    console.log(mode)
     if (gameOver) return
     if(mode === 'vsComputer' && turn != 'player'){
         return
@@ -154,9 +173,15 @@ function handleClick(event) {
         }
     }
 
-    else if (mode === 'vsComputer') {
-        turn = 'computerPlayer'
+     if (mode === 'vsComputer') {
+        console.log('TURN change if')
+        //turn = 'computerPlayer'
+        if(turn === 'computerPlayer') displayTurnMessage.textContent = `Its Computers turn`
+        else displayTurnMessage.textContent = `Its Computers turn`
+        setTimeout(()=>{
         getComputerChoice()
+
+        },1000)
     }
 
 
@@ -199,6 +224,10 @@ function displayWord() {
     console.log(scrambleWordElement)
 
 
+    // //cipher
+    // shift = Math.floor(Math.random() * 25) + 1
+    // cipherWord = cipherRound(word, shift)
+    // scrambleWordElement.textContent = cipherWord 
    
 }
 
@@ -209,7 +238,15 @@ function displayHint() {
 
 }
 
+// function cipherRound(word, shift){
+//     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' //what i wannt to shift
+//     for(let oneLetter of word){
+//        let cipherIndex = (letters.indexOf(oneLetter) + shift) %26
+//        let cipherText = letters[cipherIndex]
+//        scrambleWordElement.textContent = cipherText
+//     }
 
+// }
 
 
 //picks random letter and check if its included in the current word
@@ -224,8 +261,37 @@ function vsComputerGame(){
     startGame()
 }
 
+function getPlayerChoice(){
+        displayTurnMessage.textContent = 'Its your turn'
+
+        const splitWord = currentWord.split('')
+
+        
+         splitWord.forEach((letterInWord, index) => {
+        if (letter.toLowerCase() === letterInWord.toLowerCase()) {
+            correct = true
+            console.log('You picked right letter')
+            console.log(wordContainerElement.children)
+            wordContainerElement.children[index].textContent = letterInWord
+        }
+        console.log(letterInWord)
+    })
+
+
+    if (correct === false) {
+        turn = 'computerPlayer'
+        getComputerChoice()
+    }
+
+     checkForWinner()
+
+
+}
+
 function getComputerChoice(){
     if (gameOver) return
+
+    displayTurnMessage.textContent = 'Its computer turn'
 
     
     if (Math.random() < 0.8) { //computer player level: chance of being correct pick letters from the current word instead of random letters
@@ -239,7 +305,7 @@ function getComputerChoice(){
     const splitWord = currentWord.split('')
     let correct = false
 
-     splitWord.forEach((letterInWord, index) => {
+    splitWord.forEach((letterInWord, index) => {
         if (computerChoice.toLowerCase() === letterInWord.toLowerCase()) {
             correct = true
             console.log('Computer picked right letter!')
@@ -247,6 +313,13 @@ function getComputerChoice(){
             wordContainerElement.children[index].textContent = letterInWord
         }
         console.log(letterInWord)
+        if (correct === false) {
+            console.log('Computer picked wrong letter!')
+            console.log(wordContainerElement.children[index])
+            turn = 'player'
+            getPlayerChoice()
+        }
+
     })
 
      checkForWinner()

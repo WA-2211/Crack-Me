@@ -176,6 +176,8 @@ header{
     width: 35px;
 }
 
+
+
 #scramble {
     color: rgb(193, 211, 223);
     font-size: 45px;
@@ -187,4 +189,8 @@ header{
     border-radius: 5px;
     display: none;
     padding: 8px;
+}
+
+#turnMessage{
+    color: rgb(252, 194, 6);
 }
